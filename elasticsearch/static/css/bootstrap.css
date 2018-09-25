@@ -9127,3 +9127,9 @@ a.text-dark:hover, a.text-dark:focus {
   float: right;
   font-size: 1.5em;
 }
+
+.input-group-login {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  opacity: 0;
+}
