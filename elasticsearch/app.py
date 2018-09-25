@@ -108,8 +108,12 @@ def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
         return redirect(url_for('index'))
-    return ''' <form action="" method="post"> <p><input type=text name=username> <p><input type=submit value=Login> </form> '''
-
+    return ''' <form action="" method="post">
+                <p><input type=text name=username>
+                <p><input type=submit value=Login>
+                </form>
+            '''
+app.secret_key = 'kwokchakkwan'
 
 if __name__== "__main__":
     app.run(debug=True,port=16000)
