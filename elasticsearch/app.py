@@ -30,78 +30,77 @@ def index():
     #tempQuery = request.form.get("q")                           # Using POST Method
     if 'username' in session:
         # Check if session existed, direct read session if  existed
-        return 'Logged in as %s' % escape(session['username'])
-    return 'You are not logged in'
+        # return 'Logged in as %s' % escape(session['username'])
+        if tempQuery is not None:
+            resp = es.search\
+                (index='csearch', doc_type='doc', body=
+                    # For fuzzy query
 
-    if tempQuery is not None:
-        resp = es.search\
-            (index='csearch', doc_type='doc', body=
-                # For fuzzy query
-
-                { # start of Query
-                    "query": {
-                        "match": {
-                            "content": {
-                                "query": tempQuery,
-                                "fuzziness": "AUTO",
-                                "operator" : "and"
+                    { # start of Query
+                        "query": {
+                            "match": {
+                                "content": {
+                                    "query": tempQuery,
+                                    "fuzziness": "AUTO",
+                                    "operator" : "and"
+                                }
                             }
                         }
-                    }
-                } # End of Query
-             )
-        # End of search
-        #myString = resp['hits']['hits'][0]['_source']['content']    # Display the first answer
+                    } # End of Query
+                 )
+            # End of search
+            #myString = resp['hits']['hits'][0]['_source']['content']    # Display the first answer
 
-        #i = 0
+            #i = 0
 
-        #print len(myString.split('\n'))
+            #print len(myString.split('\n'))
 
-        #while i < len(myString):
-        #    print myString.splitlines()[i]
-        #    i += 1
+            #while i < len(myString):
+            #    print myString.splitlines()[i]
+            #    i += 1
 
-        #print len(resp['hits']['hits'])                        # Count how many result
+            #print len(resp['hits']['hits'])                        # Count how many result
 
-        # The q=tempQuery refers to the input value from table
-        # The response=resp refers to the query answer
-
-
-        # Testing: Printing the location of the file
-
-        print '---'
-        i = 0
-        splitTextArray = []
-        while i < len(resp['hits']['hits']):
-
-            rowText = resp['hits']['hits'][i]['_source']['path']['virtual']
-            splitText = filter(None, re.split("[/_P a r t . p d f]+", rowText))
-            splitTextArray.append(splitText)
+            # The q=tempQuery refers to the input value from table
+            # The response=resp refers to the query answer
 
 
-            #pprint.PrettyPrinter(depth=6).pprint(resp['hits']['hits'][i]['_source']['path']['virtual'])
-            #print splitText
-            i += 1
-        print '---'
+            # Testing: Printing the location of the file
 
-        '''
-        print splitTextArray[1][0]
-        print splitTextArray[1][1]
-        print splitTextArray[1][2]
-        '''
+            print '---'
+            i = 0
+            splitTextArray = []
+            while i < len(resp['hits']['hits']):
 
-        # Check which platform
-        platform = request.user_agent.platform
+                rowText = resp['hits']['hits'][i]['_source']['path']['virtual']
+                splitText = filter(None, re.split("[/_P a r t . p d f]+", rowText))
+                splitTextArray.append(splitText)
 
-        return render_template("index.html",
-                                q=tempQuery,
-                                response=resp,
-                                resultLength = len(resp['hits']['hits']),
-                                scroll='scrollContent',
-                                location=splitTextArray,
-                                checkPlatform=platform
-                                )
-    return render_template('index.html')        # End of if statement
+
+                #pprint.PrettyPrinter(depth=6).pprint(resp['hits']['hits'][i]['_source']['path']['virtual'])
+                #print splitText
+                i += 1
+            print '---'
+
+            '''
+            print splitTextArray[1][0]
+            print splitTextArray[1][1]
+            print splitTextArray[1][2]
+            '''
+
+            # Check which platform
+            platform = request.user_agent.platform
+
+            return render_template("index.html",
+                                    q=tempQuery,
+                                    response=resp,
+                                    resultLength = len(resp['hits']['hits']),
+                                    scroll='scrollContent',
+                                    location=splitTextArray,
+                                    checkPlatform=platform
+                                    )
+        return render_template('index.html')        # End of if statement
+    return 'You are not logged in'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
