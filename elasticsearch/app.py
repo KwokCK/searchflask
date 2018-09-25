@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,session,redirect,url_for,escape
 from elasticsearch import Elasticsearch
 
 import json
@@ -28,6 +28,11 @@ def index():
     #print tempQuery
 
     #tempQuery = request.form.get("q")                           # Using POST Method
+    if 'username' in session:
+        # Check if session existed, direct read session if  existed
+        return 'Logged in as %s' % escape(session['username'])
+    return 'You are not logged in'
+
     if tempQuery is not None:
         resp = es.search\
             (index='csearch', doc_type='doc', body=
@@ -97,6 +102,13 @@ def index():
                                 checkPlatform=platform
                                 )
     return render_template('index.html')        # End of if statement
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('index'))
+    return ''' <form action="" method="post"> <p><input type=text name=username> <p><input type=submit value=Login> </form> '''
 
 
 if __name__== "__main__":
