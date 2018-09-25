@@ -109,7 +109,8 @@ def checkUserSession():
     if request.method == 'POST':
         userName = request.form['user']
         session['userSession'] = userName
-        return redirect(url_for('index'))
+        print session['userSession'] + 'has logged'
+        return render_template('index.html')
     elif request.method == 'GET':
         if 'user' in session:
             return render_template('index.html')
