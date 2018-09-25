@@ -5,15 +5,26 @@ import json
 import nltk                 # Analyzing Text with the Natural Language Toolkit
 import pprint
 import re
+import datetime, logging, sys, json_logging, flask
 
 app = Flask(__name__)
 
 # es = Elasticsearch('localhost:16200/') # for LTM server
 es = Elasticsearch('localhost:9200/')                           # change the port
 
+json_logging.ENABLE_JSON_LOGGING = True
+json_logging.init(framework_name='flask')
+json_logging.init_request_instrument(app)
+
+# init the logger as usual
+logger = logging.getLogger("test-logger")
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 @app.route('/', methods=["GET", "POST"])
 def index():
+    logger.info("Testing loggin")
     tempQuery = request.args.get("q")                           # Using Get Method
 
     # Read the txt file and store into 2D array (questionSolution)
@@ -76,7 +87,6 @@ def index():
                 splitText = filter(None, re.split("[/_P a r t . p d f]+", rowText))
                 splitTextArray.append(splitText)
 
-
                 #pprint.PrettyPrinter(depth=6).pprint(resp['hits']['hits'][i]['_source']['path']['virtual'])
                 #print splitText
                 i += 1
@@ -97,7 +107,8 @@ def index():
                                     resultLength = len(resp['hits']['hits']),
                                     scroll='scrollContent',
                                     location=splitTextArray,
-                                    checkPlatform=platform
+                                    checkPlatform=platform,
+                                    userID=userSession
                                     )
         return render_template('index.html')        # End of if statement
     #return redirect(url_for('/login'))
