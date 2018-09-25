@@ -103,7 +103,8 @@ def index():
     #return redirect(url_for('/login'))
     return render_template('login.html')
 
-@app.route('checkUserSession', methods=['GET', 'POST'])
+@app.route('/checkUserSession', methods=['GET', 'POST'])
+# @app.route('/csearch/checkUserSession', methods=['GET', 'POST'])
 def checkUserSession():
     if request.method == 'POST':
         userName = request.form['user']
