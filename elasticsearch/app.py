@@ -97,7 +97,7 @@ def index():
                                     scroll='scrollContent',
                                     location=splitTextArray,
                                     checkPlatform=platform,
-                                    userID=userSession
+                                    userID=session['userSession']
                                     )
         return render_template('index.html')        # End of if statement
     #return redirect(url_for('/login'))
