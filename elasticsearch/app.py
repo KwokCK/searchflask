@@ -24,7 +24,9 @@ logger.addHandler(logging.StreamHandler(sys.stdout))
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    logger.info("Testing loggin")
+    logger.info("Testing logging")
+    with open("test.txt","wb") as fo:
+       fo.write(logger.info("Testing logging"))
     tempQuery = request.args.get("q")                           # Using Get Method
 
     # Read the txt file and store into 2D array (questionSolution)
