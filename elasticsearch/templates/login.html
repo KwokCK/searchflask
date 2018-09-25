@@ -13,16 +13,11 @@
       background: linear-gradient(#648880, #293f50);
     ">
     <div id="wrapper">
-      <div class="card card1 slideanim">
-      <!-- <img src="https://source.unsplash.com/random" class="img-fluid img1"> -->
-        <img src="static/pic/login.png" class="img-fluid img1">
-      </div>
-
       <div id="loginWindow">
         <form name="checkUserSession" action="checkUserSession" method="post">
           <div class="page-header">
             <p class="left">
-              <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+              <img src="static/pic/login.png" alt="..." class="img-thumbnail">
             </p>
             <h1 class="display-4" style="margin-top: 5%;">Enter your user ID:</h1>
           </div>
@@ -43,7 +38,7 @@
   $( document ).ready( function(){
     $( '#loginWindow' ).animate({ 'width': '100%' }, 500)
       .delay(30)
-      .animate({ 'height': '300px' }, 500);
+      .animate({ 'height': '350px' }, 500);
     $( '.page-header, .input-group-login, .btn' )
       .delay(850)
       .animate({ 'opacity': '100' }, 7000);
