@@ -1,3 +1,10 @@
 what is;is
 what is the defintion of;definition
 show me the example of;example
+
+log:
+- Who is using                              : User session
+- Keywords user is searching
+- How many search results
+- Which result user click most
+- How long user spend on website
