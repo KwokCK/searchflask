@@ -1,6 +1,4 @@
 # searchflask
-<<<<<<< HEAD
-=======
 
 # Config setting
 [core]
@@ -14,4 +12,3 @@
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
->>>>>>> 33b0a3ca2f473323b0986f0abfe91f2bcc8ac987
