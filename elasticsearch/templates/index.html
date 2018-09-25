@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width", initial-scale=1, charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/hover.css">
+
+    <script src="static/js/float-panel.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <title>Search engine</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="jumbotron" style="height:100vh;background-image: url(static/pic/jumbackground.jpg);color: white;">
+        <h1 class="display-4">Course search engine website</h1>
+        <hr style="width:25%;text-align:left;margin:30px 0; border:2.5px solid #fff;"/>
+        <p class="lead">Type some keywords below and search for couse content!</p>
+        <hr class="my-4">
+        <form action="/" method="get" autocomplete="off">
+          <!-- Using GET method, remember to add csearch after /  -->
+          <!-- For LTM
+            <form action="/csearch" method="get" autocomplete="off">
+            -->
+          <!-- <form action="/" method="post" autocomplete="off">      -->        <!-- Using POST method -->
+          <div class="input-group mb-3">
+            <input class="form-control" placeholder="Enter here!"type="text" name="q" id="q" value="{{q}}" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary hvr-shadow-radial" type="submit" style="background-color: #a1cff6;color: black;border-color: #a1cff6;">Search !</button>
+            </div>
+          </div>
+          <!-- End of input group -->
+        </form>
+      </div>
+      <!-- End of jumbotron container -->
+    </div>
+    {% if scroll %}
+    <script>
+      $(function() {
+        // Delay scoll for 1 ms
+        $("html, body").animate({ scrollTop: $("#{{ scroll }}").offset().top }, 1000);
+      });s
+    </script>
+    {% endif %}
+      {% if response %}
+      <div id="scrollContent">
+      <div class="container">
+      <br>
+      <h5>There are: <span class="badge badge-info">{{resultLength}}</span> relevant results from your keywords: <u><I>{{q}}</I></u></h5>
+      <br>
+      <div class="row">
+        {% for resp in response.hits.hits %}
+        <!-- Python return the value -->
+        <div class="col-lg-4">
+          <div class="card card1 slideanim">
+          <!-- <img src="https://source.unsplash.com/random" class="img-fluid img1"> -->
+          <img src="static/pic/{{loop.index}}.png" class="img-fluid img1">
+            <div class="card-body scrollClass">
+              <!-- <h3 class="mt-2">Score is: {{resp._score}} </h3> -->
+              <!-- For testing
+                <p>{{resp._source.path.virtual}}<p>
+                <p>{{ location[loop.index0][0] }}</p>
+                <p>{{ location[loop.index0][1] }}</p>
+                <p>{{ location[loop.index0][2] }}</p>
+                -->
+
+              <!-- Display the image from slide -->
+              <button type="button" class="btn btn-info btn-block hvr-float-shadow" data-toggle="modal" data-target="#{{ location[loop.index0][0] }}{{ location[loop.index0][1] }}{{ location[loop.index0][2] }}">Open PDF</button>
+
+              {% if (location[loop.index0][2]) | int > 9 %}
+                <img src="static/pdf/{{ location[loop.index0][0] }}/pdf_image/{{ location[loop.index0][1] }}_Page_{{ location[loop.index0][2] }}.jpg" class="img-thumbnail">
+              {% else %}
+                <img src="static/pdf/{{ location[loop.index0][0] }}/pdf_image/{{ location[loop.index0][1] }}_Page_0{{ location[loop.index0][2] }}.jpg" class="img-thumbnail">
+              {% endif %}
+
+              <p>{{resp._source.content}}</p>
+
+              <!--
+                <a href="static/pdf/{{ location[loop.index0][0] }}/{{ location[loop.index0][1] }}.pdf#page={{ location[loop.index0][2] }}" target="_blank">Clike me to view PDF!</a>
+                -->
+
+              <div id="{{ location[loop.index0][0] }}{{ location[loop.index0][1] }}{{ location[loop.index0][2] }}" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                      <!-- <button type="button" class="close" data-dismiss="modal">Click me to close!</button> -->
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert" style="color: white;background-color: #962e47;">
+                          <strong> Search result from... </strong><br>
+                          Couse Code: {{ location[loop.index0][0] }} <br>
+                          Topic: {{ location[loop.index0][1] }} <br>
+                          Slide number: {{ location[loop.index0][2] }}
+                      </div>
+                    <div class="modal-body">
+                      <!-- Using Loop to display the PDF page
+                        <embed src="static/pdf/{{ location[loop.index0][0] }}/{{ location[loop.index0][1] }}.pdf#page={{ location[loop.index0][2] }}" frameborder="0" width="100%" height="550px">
+                        -->
+                      <!--
+                        <object
+                          data="static/pdf/{{ location[loop.index0][0] }}/{{ location[loop.index0][1] }}.pdf#page={{ location[loop.index0][2] }}" type="application/pdf" width="100%" height="550px">
+                        </object>
+                        -->
+                      <!--
+                        <a href="static/pdf/{{ location[loop.index0][0] }}/{{ location[loop.index0][1] }}.pdf#page={{ location[loop.index0][2] }}" target="_blank">ABC PDF file</a>
+                        -->
+                      {% if (checkPlatform == 'android' or checkPlatform == 'iphone') %}
+                        <p>It appears you don't have a PDF plugin for this browser.</p>
+                        <a href="static/pdf/{{ location[loop.index0][0] }}/{{ location[loop.index0][1] }}.pdf#page={{ location[loop.index0][2] }}" target="_blank">Click me to download the PDF file!</a>
+                        {% else %}
+                        <object data="static/pdf/{{ location[loop.index0][0] }}/{{ location[loop.index0][1] }}.pdf#page={{ location[loop.index0][2] }}" width="100%" height="550px">
+                        </object>
+                      {% endif %}
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Click me to close!</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End of display PDF -->
+              <!--
+                {% if resp._score > 6 %}
+                  <a href="#" class="btn btn-primary">Go somewhere</a><br>
+                {% else %}
+                  <a href="#" class="btn btn-primary">Below 6</a><br>
+                {% endif %}
+                -->
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <br><br>
+      {% endif %}
+    </div>
+    <!-- End of container -->
+  </body>
+</html>
