@@ -103,17 +103,6 @@ def index():
     #return redirect(url_for('/login'))
     return render_template('login.html')
 
-@app.route('login_old', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        session['username'] = request.form['username']
-        return redirect(url_for('index'))
-    return ''' <form action="" method="post">
-                    <p>Enter you user ID: <input type=text name=username>
-                    <p><input type=submit value=Login>
-                </form>
-            '''
-
 @app.route('checkUserSession', methods=['GET', 'POST'])
 def checkUserSession():
     if request.method == 'POST':
@@ -122,7 +111,7 @@ def checkUserSession():
         return redirect(url_for('index'))
     elif request.method == 'GET':
         if 'user' in session:
-            return redirect(url_for('index'))
+            return render_template('index.html')
         else:
             return render_template('login.html')
 
