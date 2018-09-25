@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block body %}
+<form name="register" action="{{ url_for('register') }}" method="post">
+    Login ID:
+    <input type="text" name="user" />
+</form>
+{% endblock %}

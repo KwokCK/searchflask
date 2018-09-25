@@ -28,7 +28,7 @@ def index():
     #print tempQuery
 
     #tempQuery = request.form.get("q")                           # Using POST Method
-    if 'username' in session:
+    if 'user' in session:
         # Check if session existed, direct read session if  existed
         # return 'Logged in as %s' % escape(session['username'])
         if tempQuery is not None:
@@ -88,7 +88,7 @@ def index():
             print splitTextArray[1][2]
             '''
 
-            # Check which platform
+            # Check which platform (IOS/ Android/ Windows)
             platform = request.user_agent.platform
 
             return render_template("index.html",
@@ -101,9 +101,9 @@ def index():
                                     )
         return render_template('index.html')        # End of if statement
     #return redirect(url_for('/login'))
-    return redirect('/login')
+    return render_template('login.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login_old', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
@@ -113,6 +113,19 @@ def login():
                     <p><input type=submit value=Login>
                 </form>
             '''
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        user_name = request.form['user']
+        session['user'] = user_name
+        return 'hello, ' + session['user']
+    elif request.method == 'GET':
+        if 'user' in session:
+            return redirect(url_for('index'))
+        else:
+            return render_template('login.html')
+
 app.secret_key = 'kwokchakkwan'
 
 if __name__== "__main__":
