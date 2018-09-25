@@ -28,7 +28,7 @@ def index():
     #print tempQuery
 
     #tempQuery = request.form.get("q")                           # Using POST Method
-    if 'user' in session:
+    if 'userSession' in session:
         # Check if session existed, direct read session if  existed
         # return 'Logged in as %s' % escape(session['username'])
         if tempQuery is not None:
@@ -114,12 +114,12 @@ def login():
                 </form>
             '''
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
+@app.route('/checkUserSession', methods=['GET', 'POST'])
+def checkUserSession():
     if request.method == 'POST':
-        user_name = request.form['user']
-        session['user'] = user_name
-        return 'hello, ' + session['user']
+        userName = request.form['user']
+        session['userSession'] = userName
+        return redirect(url_for('index'))
     elif request.method == 'GET':
         if 'user' in session:
             return redirect(url_for('index'))
