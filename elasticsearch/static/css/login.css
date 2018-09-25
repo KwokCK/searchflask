@@ -6,15 +6,10 @@ html {
 }
 
 body{
-  font-family: "Quicksand", sans-serif;
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background: #grey;
-  background: #466368;
-  background: -webkit-linear-gradient(#648880, #293f50);
-  background:    -moz-linear-gradient(#648880, #293f50);
   background:         linear-gradient(#648880, #293f50);
 }
 
