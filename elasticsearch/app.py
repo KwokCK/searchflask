@@ -100,7 +100,8 @@ def index():
                                     checkPlatform=platform
                                     )
         return render_template('index.html')        # End of if statement
-    return 'You are not logged in'
+    #return redirect(url_for('/login'))
+    return redirect('/login')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -108,8 +109,8 @@ def login():
         session['username'] = request.form['username']
         return redirect(url_for('index'))
     return ''' <form action="" method="post">
-                <p><input type=text name=username>
-                <p><input type=submit value=Login>
+                    <p>Enter you user ID: <input type=text name=username>
+                    <p><input type=submit value=Login>
                 </form>
             '''
 app.secret_key = 'kwokchakkwan'
