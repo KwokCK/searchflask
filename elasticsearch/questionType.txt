@@ -6,10 +6,10 @@ log:
 Txt
 
 Format:
-Time
+Time, Session user, Activity type
 
-Example:
-, , , ,
+Activity type:
+1 = Logged in
 
 - Who is using
 - Host machine

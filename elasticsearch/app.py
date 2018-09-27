@@ -109,14 +109,18 @@ def checkUserSession():
 
     # timeNow = time.strftime("%c")
     ## date and time representation
-    print "Current date & time " + time.strftime("%c")
+    # print "Current date & time " + time.strftime("%c")
 
     if request.method == 'POST':
         userName = request.form['user']
         session['userSession'] = userName
         # print session['userSession'] + 'has logged'
         with open("log.txt", "a") as logFile:
-            logFile.write(session['userSession'] + "has logged \n")
+            logFile.write(  "\n"
+                            time.strftime("%c"),
+                            1,
+                            session['userSession'] + "has logged
+                            ")
 
         return render_template('index.html')
     elif request.method == 'GET':
