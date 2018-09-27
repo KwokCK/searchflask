@@ -116,9 +116,9 @@ def checkUserSession():
         session['userSession'] = userName
         # print session['userSession'] + 'has logged'
         with open("log.txt", "a") as logFile:
-            logFile.write(  "\n"
-                            time.strftime("%c"),
-                            1,
+            logFile.write(  "\n"+
+                            time.strftime("%c")+
+                            ",1,"+
                             session['userSession'] + "has logged
                             ")
 
