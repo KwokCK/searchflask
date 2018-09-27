@@ -117,9 +117,9 @@ def checkUserSession():
         # print session['userSession'] + 'has logged'
         with open("log.txt", "a") as logFile:
             logFile.write(  "\n"+
-                            time.strftime("%c")+
+                            time.now().strftime('%Y/%m/%d %H:%M:%S')+
                             ",1,"+
-                            session['userSession'] + "has logged")
+                            session['userSession'] + " has logged")
 
         return render_template('index.html')
     elif request.method == 'GET':
