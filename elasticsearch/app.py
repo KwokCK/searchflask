@@ -12,10 +12,8 @@ app = Flask(__name__)
 es = Elasticsearch('localhost:9200/')                           # change the port
 
 
-
-with open("test.txt", "a") as myfile:
-    myfile.write("appended text")
-
+with open("log.txt", "a") as logFile:
+    logFile.write("appended text \n")
 
 
 @app.route('/', methods=["GET", "POST"])
