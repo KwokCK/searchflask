@@ -11,6 +11,7 @@ Time, Session user, Activity type
 Activity type:
 1 = Logged in
 2 = query keywords search
+3 = which button hits
 
 - Who is using
 - Host machine

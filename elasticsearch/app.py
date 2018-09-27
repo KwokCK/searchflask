@@ -15,7 +15,7 @@ es = Elasticsearch('localhost:9200/')                           # change the por
 @app.route('/', methods=["GET", "POST"])
 def index():
     tempQuery = request.args.get("q")                           # Using Get Method
-
+    tempButtonID = request.args.get("TestValue")
     # Read the txt file and store into 2D array (questionSolution)
     '''
     with open("questionType.txt") as file:
@@ -80,6 +80,7 @@ def index():
                 #print splitText
                 i += 1
             print '---'
+            print 'Button ID is: ' + tempButtonID;
 
             '''
             print splitTextArray[1][0]
@@ -96,7 +97,7 @@ def index():
                                 ",2,"+
                                 session['userSession']+
                                 ","+
-                                tempQuery
+                                "Query: "+tempQuery
                                 )
 
             return render_template("index.html",

@@ -67,7 +67,11 @@
                 -->
 
               <!-- Display the image from slide -->
-              <button type="button" class="btn btn-info btn-block hvr-float-shadow" data-toggle="modal" data-target="#{{ location[loop.index0][0] }}{{ location[loop.index0][1] }}{{ location[loop.index0][2] }}">Open PDF</button>
+              <form action="/" method="get" autocomplete="off">
+                  <button name="buttonID" value="TestValue" type="button" class="btn btn-info btn-block hvr-float-shadow" data-toggle="modal" data-target="#{{ location[loop.index0][0] }}{{ location[loop.index0][1] }}{{ location[loop.index0][2] }}">Open PDF</button>
+              </form>
+
+              <!-- try to log down the button event -->
 
               {% if (location[loop.index0][2]) | int > 9 %}
                 <img src="static/pdf/{{ location[loop.index0][0] }}/pdf_image/{{ location[loop.index0][1] }}_Page_{{ location[loop.index0][2] }}.jpg" class="img-thumbnail">
