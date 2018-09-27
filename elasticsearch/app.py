@@ -12,6 +12,12 @@ app = Flask(__name__)
 es = Elasticsearch('localhost:9200/')                           # change the port
 
 
+
+with open("test.txt", "a") as myfile:
+    myfile.write("appended text")
+
+
+
 @app.route('/', methods=["GET", "POST"])
 def index():
     tempQuery = request.args.get("q")                           # Using Get Method
