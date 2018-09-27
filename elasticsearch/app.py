@@ -5,16 +5,12 @@ import json
 import nltk                 # Analyzing Text with the Natural Language Toolkit
 import pprint
 import re
+import time
 
 app = Flask(__name__)
 
 # es = Elasticsearch('localhost:16200/') # for LTM server
 es = Elasticsearch('localhost:9200/')                           # change the port
-
-
-with open("log.txt", "a") as logFile:
-    logFile.write("appended text \n")
-
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -110,10 +106,18 @@ def index():
 @app.route('/checkUserSession', methods=['GET', 'POST'])
 # @app.route('/csearch/checkUserSession', methods=['GET', 'POST'])
 def checkUserSession():
+
+    # timeNow = time.strftime("%c")
+    ## date and time representation
+    print "Current date & time " + time.strftime("%c")
+
     if request.method == 'POST':
         userName = request.form['user']
         session['userSession'] = userName
-        print session['userSession'] + 'has logged'
+        # print session['userSession'] + 'has logged'
+        with open("log.txt", "a") as logFile:
+            logFile.write(session['userSession'] + "has logged \n")
+
         return render_template('index.html')
     elif request.method == 'GET':
         if 'user' in session:

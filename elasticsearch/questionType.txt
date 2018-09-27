@@ -5,6 +5,12 @@ show me the example of;example
 log:
 Txt
 
+Format:
+Time
+
+Example:
+, , , ,
+
 - Who is using
 - Host machine
 - Time of using
