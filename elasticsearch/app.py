@@ -15,22 +15,16 @@ es = Elasticsearch('localhost:9200/')                           # change the por
 @app.route('/', methods=["GET", "POST"])
 def index():
     tempQuery = request.args.get("q")                           # Using Get Method
-    tempButtonID = request.args.get("TestValue")
+    tempButtonID = request.args.get("buttonID")
     # Read the txt file and store into 2D array (questionSolution)
-    '''
-    with open("questionType.txt") as file:
-        questionSolution = [line.rstrip("\n").split(";") for line in file]
-    '''
-    # Using loop to compare the question type, check tempQuery contain those word or not
-
-
-    # Process the query from user input
-    #print tempQuery
 
     #tempQuery = request.form.get("q")                           # Using POST Method
     if 'userSession' in session:
         # Check if session existed, direct read session if  existed
         # return 'Logged in as %s' % escape(session['username'])
+        if tempButtonID is not None:
+            print 'Button ID is: ' + tempButtonID;
+
         if tempQuery is not None:
             resp = es.search\
                 (index='csearch', doc_type='doc', body=
@@ -80,7 +74,6 @@ def index():
                 #print splitText
                 i += 1
             print '---'
-            print 'Button ID is: ' + tempButtonID;
 
             '''
             print splitTextArray[1][0]
