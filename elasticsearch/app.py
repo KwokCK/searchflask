@@ -90,6 +90,15 @@ def index():
             # Check which platform (IOS/ Android/ Windows)
             platform = request.user_agent.platform
 
+            with open("log.txt", "a") as logFile:
+                logFile.write(  "\n"+
+                                time.strftime('%Y/%m/%d %H:%M:%S')+
+                                ",2,"+
+                                session['userSession']+
+                                ","+
+                                tempQuery
+                                )
+
             return render_template("index.html",
                                     q=tempQuery,
                                     response=resp,

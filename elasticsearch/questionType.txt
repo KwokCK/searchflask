@@ -10,6 +10,7 @@ Time, Session user, Activity type
 
 Activity type:
 1 = Logged in
+2 = query keywords search
 
 - Who is using
 - Host machine
