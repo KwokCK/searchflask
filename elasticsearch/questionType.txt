@@ -3,9 +3,14 @@ what is the defintion of;definition
 show me the example of;example
 
 log:
-- Who is using                              : User session
+Txt
+
+- Who is using
+- Host machine
 - Time of using
-- Keywords user is searching
+- Keywords user is searching      : Search Session
 - How many search results
-- Which result user click most
+- Which result user click most    :
 - How long user spend on website
+
+- Fix the search ranking
