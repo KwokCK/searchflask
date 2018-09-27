@@ -23,7 +23,15 @@ def index():
         # Check if session existed, direct read session if  existed
         # return 'Logged in as %s' % escape(session['username'])
         if tempButtonID is not None:
-            print 'Button ID is: ' + tempButtonID;
+            # print 'Button ID is: ' + tempButtonID;
+            with open("log.txt", "a") as logFile:
+                logFile.write(  "\n"+
+                                time.strftime('%Y/%m/%d %H:%M:%S')+
+                                ",3,"+
+                                session['userSession']+
+                                ","+
+                                "Click button number: "+ tempButtonID
+                                )
 
         if tempQuery is not None:
             resp = es.search\

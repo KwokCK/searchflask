@@ -47,7 +47,7 @@
       {% if response %}
       <div id="scrollContent">
       <div class="container">
-      <br>
+      <iframe style="width:0; height:0; border:0; border:none" name="dummyframe" id="dummyframe"></iframe>
       <h5>There are: <span class="badge badge-info">{{resultLength}}</span> relevant results from your keywords: <u><I>{{q}}</I></u></h5>
       <br>
       <div class="row">
@@ -67,8 +67,9 @@
                 -->
 
               <!-- Display the image from slide -->
-              <form action="/" method="get" autocomplete="off">
-                  <button name="buttonID" value="TestValue" type="button" class="btn btn-info btn-block hvr-float-shadow" data-toggle="modal" data-target="#{{ location[loop.index0][0] }}{{ location[loop.index0][1] }}{{ location[loop.index0][2] }}">Open PDF</button>
+              <form action="/" method="get" autocomplete="off" target="dummyframe">
+                  <button type="submit" class="btn btn-info btn-block hvr-float-shadow" data-toggle="modal" data-target="#{{ location[loop.index0][0] }}{{ location[loop.index0][1] }}{{ location[loop.index0][2] }}">Open PDF</button>
+                  <input id="buttonID" name="buttonID" value="{{loop.index}}" type="hidden">
               </form>
 
               <!-- try to log down the button event -->
