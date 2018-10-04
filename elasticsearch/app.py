@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask,render_template,request,session,redirect,url_for,escape
 from elasticsearch import Elasticsearch
 
@@ -6,6 +7,10 @@ import nltk                 # Analyzing Text with the Natural Language Toolkit
 import pprint
 import re
 import time
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 app = Flask(__name__)
 
@@ -14,7 +19,7 @@ es = Elasticsearch('localhost:9200/')                           # change the por
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    tempQuery = request.args.get("q")                           # Using Get Method
+    tempQuery = request.args.get("q")                            # Using Get Method
     tempButtonID = request.args.get("buttonID")
     # Read the txt file and store into 2D array (questionSolution)
 
@@ -43,6 +48,7 @@ def index():
                             "match": {
                                 "content": {
                                     "query": tempQuery,
+                                    # "query": "郭澤坤",
                                     "fuzziness": "AUTO",
                                     "operator" : "and"
                                 }
@@ -69,7 +75,7 @@ def index():
 
             # Testing: Printing the location of the file
 
-            print '---'
+            print('---')
             i = 0
             splitTextArray = []
             while i < len(resp['hits']['hits']):
@@ -81,7 +87,6 @@ def index():
                 #pprint.PrettyPrinter(depth=6).pprint(resp['hits']['hits'][i]['_source']['path']['virtual'])
                 #print splitText
                 i += 1
-            print '---'
 
             '''
             print splitTextArray[1][0]
