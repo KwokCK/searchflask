@@ -51,7 +51,7 @@ def index():
                                     # "query": "郭澤坤 新界喇沙大學",
                                     "fuzziness": "AUTO",
                                     "operator" : "and",
-                                    "minimum_should_match": "75%"
+                                    # "minimum_should_match": "75%"
                                 }
                             }
                         }
