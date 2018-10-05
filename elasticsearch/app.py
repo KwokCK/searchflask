@@ -48,9 +48,10 @@ def index():
                             "match": {
                                 "content": {
                                     "query": tempQuery,
+                                    # "query": "郭澤坤",
                                     "fuzziness": "AUTO",
                                     "operator" : "and",
-                                    "minimum_should_match": "75%"
+                                    "minimum_should_match": "-25%"
                                 }
                             }
                         }
