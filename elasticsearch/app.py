@@ -53,7 +53,7 @@ def index():
                                     "operator" : "and"
                                 }
                             }
-                            "minimum_number_should_match": -25%
+                            "minimum_number_should_match": "-25%"
                         }
                     } # End of Query
                  )
