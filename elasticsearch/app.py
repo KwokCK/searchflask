@@ -48,10 +48,10 @@ def index():
                             "match": {
                                 "content": {
                                     "query": tempQuery,
-                                    # "query": "郭澤坤",
+                                    # "query": "郭澤坤 新界喇沙大學",
                                     "fuzziness": "AUTO",
                                     "operator" : "and",
-                                    "minimum_should_match": "-25%"
+                                    "minimum_should_match": "75%"
                                 }
                             }
                         }
