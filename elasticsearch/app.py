@@ -60,7 +60,6 @@ def index():
             #myString = resp['hits']['hits'][0]['_source']['content']    # Display the first answer
 
             #i = 0
-
             #print len(myString.split('\n'))
 
             #while i < len(myString):
